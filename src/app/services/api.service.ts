@@ -9,4 +9,8 @@ export class ApiService {
   public url: string = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) {}
+
+  public getPartidos() {
+    return this.httpClient.get(this.url + "partidos");
+  }
 }
