@@ -1,20 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Tab 1 </ion-title>
+    <ion-title> Listagem de partidos </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">API</ion-title>
+      <ion-title size="large">Partidos</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-list>
     <ion-item *ngFor="let partido of partidos">
-      <ion-label>{{partido.nome}}</ion-label>
-      <ion-button color="primary">Membros !</ion-button>
+      <ion-label
+        >{{partido.nome | textToLower}} - {{partido.sigla | textToUpper}}
+      </ion-label>
+      <app-button-go-to-link
+        name="Membros"
+        icon="people"
+      ></app-button-go-to-link>
     </ion-item>
   </ion-list>
 </ion-content>
