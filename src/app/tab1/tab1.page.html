@@ -13,12 +13,13 @@
 
   <ion-list>
     <ion-item *ngFor="let partido of partidos">
-      <ion-label
-        >{{partido.nome | textToLower}} - {{partido.sigla | textToUpper}}
+      <ion-label appTextBlue
+        >{{partido.nome | textToUpper}} - {{partido.sigla | textToLower}}
       </ion-label>
       <app-button-go-to-link
         name="Membros"
         icon="people"
+        [idPartido]="partido.id"
       ></app-button-go-to-link>
     </ion-item>
   </ion-list>

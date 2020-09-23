@@ -7,6 +7,7 @@ import { Tab1Page } from "./tab1.page";
 import { ButtonGoToLinkComponent } from "../button-go-to-link/button-go-to-link.component";
 
 import { Tab1PageRoutingModule } from "./tab1-routing.module";
+import { DirectivesModule } from "../directives/directives.module";
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { Tab1PageRoutingModule } from "./tab1-routing.module";
     FormsModule,
     Tab1PageRoutingModule,
     PipesModule,
+    DirectivesModule,
   ],
   declarations: [Tab1Page, ButtonGoToLinkComponent],
 })
