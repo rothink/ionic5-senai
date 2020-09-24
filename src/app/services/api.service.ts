@@ -1,3 +1,4 @@
+import { ResponseApi } from "./../models/response-api";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
@@ -11,11 +12,13 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public getPartidos(): Observable<any> {
-    return this.httpClient.get(this.url + "partidos");
+  public getPartidos(): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(this.url + "partidos");
   }
 
   public getMembrosDoPartido(idPartido: number): Observable<any> {
-    return this.httpClient.get(this.url + "partidos/" + idPartido + "/membros");
+    return this.httpClient.get<ResponseApi>(
+      this.url + "partidos/" + idPartido + "/membros"
+    );
   }
 }

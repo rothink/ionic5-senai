@@ -1,3 +1,4 @@
+import { Membro } from "./../models/membro";
 import { ApiService } from "./../services/api.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -9,7 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class MembrosPage implements OnInit {
   idPartido: number;
-  membros: Array<any> = [];
+  membros: Array<Membro> = [];
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit() {

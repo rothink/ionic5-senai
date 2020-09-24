@@ -6,4 +6,23 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content> </ion-content>
+
+<ion-content>
+  <ion-row class="ion-align-items-center">
+    <ion-col>
+      <ion-card *ngFor="let membro of membros" class="list-card">
+        <img [src]="membro.urlFoto" />
+        <ion-card-header>
+          <ion-card-subtitle>{{membro.nome}}</ion-card-subtitle>
+          <ion-card-title
+            >{{membro.siglaPartido}} - {{membro.siglaUf}}</ion-card-title
+          >
+        </ion-card-header>
+        <ion-card-content> {{membro.email}} </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-text color="danger" *ngIf="membros.length === 0">
+    <h4>Não existem membros nesse partido</h4>
+  </ion-text>
+</ion-content>

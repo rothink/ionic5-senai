@@ -1,3 +1,4 @@
+import { Partido } from "./../models/partido";
 import { ApiService } from "./../services/api.service";
 import { Component, OnInit } from "@angular/core";
 
@@ -9,7 +10,7 @@ import { Component, OnInit } from "@angular/core";
 export class Tab1Page implements OnInit {
   constructor(public apiService: ApiService) {}
 
-  public partidos = [];
+  public partidos: Array<Partido>;
 
   ngOnInit() {
     this.apiService.getPartidos().subscribe((res) => {
