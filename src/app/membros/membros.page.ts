@@ -2,6 +2,9 @@ import { Membro } from "./../models/membro";
 import { ApiService } from "./../services/api.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { LoadingController } from "@ionic/angular";
+import { ModalController } from "@ionic/angular";
+import { ModalDeputadoPage } from "../modal-deputado/modal-deputado.page";
 
 @Component({
   selector: "app-membros",
@@ -11,18 +14,50 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class MembrosPage implements OnInit {
   idPartido: number;
   membros: Array<Membro> = [];
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
+  varLoading = null;
+  carregando = false;
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    public loading: LoadingController,
+    public modal: ModalController
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.carregando = true;
+    await this.showLoading();
     this.idPartido = this.route.snapshot.params.id;
-    this.buscarMembrosDoPartido();
+    await this.buscarMembrosDoPartido();
   }
 
-  buscarMembrosDoPartido(): void {
-    this.apiService
+  async abrirModal(idDeputado: number): Promise<void> {
+    const modal = await this.modal.create({
+      component: ModalDeputadoPage,
+      componentProps: {
+        idDeputado,
+      },
+    });
+    return await modal.present();
+  }
+
+  async showLoading() {
+    this.varLoading = await this.loading.create({
+      message: "Aguarde ...",
+    });
+    await this.varLoading.present();
+  }
+
+  async hideLoading() {
+    await this.varLoading.dismiss();
+  }
+
+  async buscarMembrosDoPartido(): Promise<void> {
+    await this.apiService
       .getMembrosDoPartido(this.idPartido)
       .subscribe((response) => {
         this.membros = response.dados;
+        this.carregando = false;
       });
+    await this.hideLoading();
   }
 }
