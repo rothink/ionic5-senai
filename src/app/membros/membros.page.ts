@@ -24,7 +24,6 @@ export class MembrosPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.carregando = true;
     await this.showLoading();
     this.idPartido = this.route.snapshot.params.id;
     await this.buscarMembrosDoPartido();
@@ -52,6 +51,9 @@ export class MembrosPage implements OnInit {
   }
 
   async buscarMembrosDoPartido(): Promise<void> {
+    this.membros = [];
+    this.carregando = true;
+
     await this.apiService
       .getMembrosDoPartido(this.idPartido)
       .subscribe((response) => {
@@ -59,5 +61,22 @@ export class MembrosPage implements OnInit {
         this.carregando = false;
       });
     await this.hideLoading();
+  }
+
+  async search(event) {
+    let valorProcurado = event.target.value;
+
+    if (!valorProcurado) {
+      this.buscarMembrosDoPartido();
+      return;
+    }
+
+    this.membros = this.membros.filter((membro) => {
+      return membro.nome.toLowerCase().includes(valorProcurado.toLowerCase());
+    });
+  }
+
+  async reset() {
+    this.buscarMembrosDoPartido();
   }
 }
