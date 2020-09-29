@@ -13,8 +13,10 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public getPartidos(): Observable<ResponseApi> {
-    return this.httpClient.get<ResponseApi>(this.url + "partidos");
+  public getPartidos(page: number): Observable<ResponseApi> {
+    return this.httpClient.get<ResponseApi>(
+      this.url + "partidos?pagina=" + page
+    );
   }
 
   public getMembrosDoPartido(idPartido: number): Observable<any> {

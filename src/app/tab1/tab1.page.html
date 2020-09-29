@@ -24,3 +24,24 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment>
+      <ion-segment-button
+        value="anterior"
+        (click)="anteriorPagina()"
+        [disabled]="page === 1"
+      >
+        <ion-label>Anterior</ion-label>
+      </ion-segment-button>
+      <ion-segment-button
+        value="proxima"
+        (click)="proximaPagina()"
+        [disabled]="!temProximaPagina()"
+      >
+        <ion-label>Próxima</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
