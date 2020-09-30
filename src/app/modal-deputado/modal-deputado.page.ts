@@ -13,6 +13,7 @@ export class ModalDeputadoPage implements OnInit {
   @Input() idDeputado: number;
   public deputado: Deputado;
   public carregando: any;
+  public finish: boolean = false;
 
   constructor(
     private modal: ModalController,
@@ -40,10 +41,12 @@ export class ModalDeputadoPage implements OnInit {
     this.api.getDeputadoById(id).subscribe((res) => {
       this.deputado = res.dados;
       this.hideLoading();
+      this.finish = true;
     });
   }
 
   fecharModal(): void {
     this.modal.dismiss();
+    this.finish = false;
   }
 }

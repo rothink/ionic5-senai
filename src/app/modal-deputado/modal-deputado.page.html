@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Deputado: {{deputado.ultimoStatus.nome}} </ion-title>
+    <ion-title>Deputado </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="fecharModal()">
         <ion-icon name="close"></ion-icon>
@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="center">
+  <ion-card class="center" *ngIf="finish">
     <ion-avatar>
       <img [src]="deputado.ultimoStatus.urlFoto" />
     </ion-avatar>
