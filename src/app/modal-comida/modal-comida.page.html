@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro de comida </ion-title>
+    <ion-buttons slot="end" color="danger">
+      <ion-button (click)="fecharModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form novalidate [formGroup]="form" (ngSubmit)="submitForm()">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input formControlName="nome" type="text" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Tipo</ion-label>
+          <ion-select formControlName="tipo">
+            <ion-select-option value="brown">Brown</ion-select-option>
+            <ion-select-option value="blonde">Blonde</ion-select-option>
+            <ion-select-option value="black">Black</ion-select-option>
+            <ion-select-option value="red">Red</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-textarea
+            formControlName="descricao"
+            placeholder="Descrição da comida..."
+          ></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-datetime
+            formControlName="validade"
+            display-timezone="utc"
+            display-format="DD MM YYYY"
+            placeholder="Selecione a data da entrega"
+          ></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>HH mm</ion-label>
+          <ion-datetime
+            displayFormat="HH mm"
+            placeholder="Selecione a Hora de Entrega"
+          ></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Avaliação</ion-label>
+          <ion-range min="-0" max="10" pin color="secondary">
+            <ion-icon
+              slot="start"
+              size="small"
+              name="thumbs-down-outline"
+            ></ion-icon>
+            <ion-icon slot="end" name="thumbs-up-outline"></ion-icon>
+          </ion-range>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-radio-group value="grape">
+          <ion-list-header>
+            <ion-label>Com pimenta?</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Sim</ion-label>
+            <ion-radio slot="start" color="success" value="sim"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Não</ion-label>
+            <ion-radio slot="start" color="tertiary" value="nao"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="success" expand="block">
+          Salvar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
