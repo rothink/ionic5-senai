@@ -1,3 +1,4 @@
+import { ComidaService } from "./../services/comida.service";
 import { ModalController } from "@ionic/angular";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
@@ -9,19 +10,26 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 })
 export class ModalComidaPage implements OnInit {
   public form: FormGroup;
-  constructor(private modal: ModalController, public formBuilder: FormBuilder) {
+  constructor(
+    private modal: ModalController,
+    public formBuilder: FormBuilder,
+    public comidaService: ComidaService
+  ) {
     this.form = formBuilder.group({
       nome: [""],
       tipo: [""],
       descricao: [""],
-      validade: [""],
+      dataEntrega: [""],
+      horaEntrega: [""],
+      avaliacao: [""],
+      isPimenta: [""],
     });
   }
 
   ngOnInit() {}
 
   submitForm() {
-    console.log(this.form.value);
+    this.comidaService.salvarComida(this.form.value);
   }
 
   fecharModal(): void {
