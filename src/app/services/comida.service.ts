@@ -1,31 +1,32 @@
-import { Storage } from "@ionic/storage";
 import { Injectable } from "@angular/core";
+import { Storage } from "@ionic/storage";
 
 @Injectable({
   providedIn: "root",
 })
 export class ComidaService {
-  constructor(private storage: Storage) {
-    storage.set("comidas", JSON.stringify([{ nome: "comida" }]));
-    // Or to get a key/value pair
+  constructor(public storage: Storage) {}
+
+  public async salvarComida(value) {
+    let comidas = await this.getAll();
+    if (!comidas) {
+      comidas = [];
+    }
+    comidas.push(value);
+    await this.storage.set("comidas", JSON.stringify(comidas));
+  }
+  public async getAll() {
+    let comidas = await this.storage.get("comidas");
+    comidas = JSON.parse(comidas);
+    return comidas;
+  }
+  public async removeAll() {
+    return await this.storage.remove("comidas");
   }
 
-  public getAll() {
-    return this.storage.get("comidas").then((comidas) => {
-      if (!comidas) {
-        return Promise.resolve([]);
-      }
-      if (!comidas.isArray) {
-        return Promise.resolve([]);
-      }
-      return Promise.resolve(comidas);
-    });
-  }
-
-  public salvarComida(comida) {
-    this.getAll().then((comidas) => {
-      comidas.push(comida);
-      this.storage.set("comidas", comidas);
-    });
+  public async remove(index: number) {
+    let comidas = await this.getAll();
+    comidas.splice(index, 1);
+    await this.storage.set("comidas", JSON.stringify(comidas));
   }
 }

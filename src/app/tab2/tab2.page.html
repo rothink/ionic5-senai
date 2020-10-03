@@ -13,22 +13,23 @@
       <ion-title size="large">Comidas</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <!-- 
-    <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
-      <ion-item lines="full">
-       <ion-label position="floating">Name</ion-label>
-        <ion-input formControlName="name" type="text" required></ion-input>
-      </ion-item>
 
-      <ion-row>
-        <ion-col>
-          <ion-button type="submit" color="danger" expand="block"
-            >Submit</ion-button
-          >
-        </ion-col>
-      </ion-row>
-    </form>
-    -->
-  </ion-content>
+  <ion-list>
+    <ion-item *ngFor="let comida of comidas; let key = index">
+      <ion-avatar slot="start">
+        <img src="http://lorempixel.com/100/60/food/" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{comida.nome}}</h2>
+        <ion-text color="medium">
+          <h3>{{comida.tipo}}</h3>
+        </ion-text>
+
+        <p>{{comida.descricao}}</p>
+      </ion-label>
+      <ion-button color="danger" slot="end" (click)="removerComida(key)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

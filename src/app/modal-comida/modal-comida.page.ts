@@ -28,8 +28,8 @@ export class ModalComidaPage implements OnInit {
 
   ngOnInit() {}
 
-  submitForm() {
-    this.comidaService.salvarComida(this.form.value);
+  async submitForm() {
+    await this.comidaService.salvarComida(this.form.value);
   }
 
   fecharModal(): void {
