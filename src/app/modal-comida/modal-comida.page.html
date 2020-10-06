@@ -118,7 +118,7 @@
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="success" expand="block">
-          Salvar
+          {{this.id || this.id === 0 ? 'Atualizar' : 'Salvar'}}
         </ion-button>
       </ion-col>
     </ion-row>

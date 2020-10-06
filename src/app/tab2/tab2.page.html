@@ -27,6 +27,9 @@
 
         <p>{{comida.descricao}}</p>
       </ion-label>
+      <ion-button color="primary" slot="end" (click)="editarComida(key)">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
       <ion-button color="danger" slot="end" (click)="removerComida(key)">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-button>

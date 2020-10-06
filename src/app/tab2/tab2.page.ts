@@ -16,8 +16,8 @@ export class Tab2Page implements OnInit {
     public comidaService: ComidaService
   ) {}
 
-  ngOnInit() {
-    this.getComidas();
+  async ngOnInit() {
+    await this.getComidas();
   }
 
   async abrirModalComida() {
@@ -34,5 +34,15 @@ export class Tab2Page implements OnInit {
   async removerComida(key) {
     await this.comidaService.remove(key);
     await this.getComidas();
+  }
+
+  async editarComida(id: number) {
+    const modal = await this.modal.create({
+      component: ModalComidaPage,
+      componentProps: {
+        id,
+      },
+    });
+    return await modal.present();
   }
 }

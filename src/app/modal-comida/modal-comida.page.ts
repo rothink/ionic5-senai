@@ -1,6 +1,6 @@
 import { ComidaService } from "./../services/comida.service";
 import { ModalController } from "@ionic/angular";
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
@@ -9,7 +9,11 @@ import { FormGroup, FormBuilder } from "@angular/forms";
   styleUrls: ["./modal-comida.page.scss"],
 })
 export class ModalComidaPage implements OnInit {
+  @Input() id: number;
+
   public form: FormGroup;
+  public isEdit: boolean = false;
+
   constructor(
     private modal: ModalController,
     public formBuilder: FormBuilder,
@@ -26,10 +30,22 @@ export class ModalComidaPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    if (this.id || this.id == 0) {
+      this.isEdit = true;
+      await this.preencherForm();
+    }
+  }
+
+  async preencherForm() {
+    const comida = await this.comidaService.find(this.id);
+    console.info(comida, "comida");
+    this.form.patchValue(comida);
+    console.info(comida, "comida");
+  }
 
   async submitForm() {
-    await this.comidaService.salvarComida(this.form.value);
+    await this.comidaService.salvarComida(this.form.value, this.id);
   }
 
   fecharModal(): void {
