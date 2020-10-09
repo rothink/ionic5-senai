@@ -19,6 +19,10 @@
           <ion-label position="floating">Nome</ion-label>
           <ion-input formControlName="nome" type="text" required></ion-input>
         </ion-item>
+        <app-form-input-error
+          [form]="form"
+          formInput="nome"
+        ></app-form-input-error>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -39,6 +43,10 @@
             </ion-select-option>
           </ion-select>
         </ion-item>
+        <app-form-input-error
+          [form]="form"
+          formInput="tipo"
+        ></app-form-input-error>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -49,6 +57,10 @@
             placeholder="Descrição da comida..."
           ></ion-textarea>
         </ion-item>
+        <app-form-input-error
+          [form]="form"
+          formInput="descricao"
+        ></app-form-input-error>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -63,6 +75,10 @@
             placeholder="Selecione a data da entrega"
           ></ion-datetime>
         </ion-item>
+        <app-form-input-error
+          [form]="form"
+          formInput="dataEntrega"
+        ></app-form-input-error>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -75,6 +91,10 @@
             placeholder="Selecione a Hora de Entrega"
           ></ion-datetime>
         </ion-item>
+        <app-form-input-error
+          [form]="form"
+          formInput="horaEntrega"
+        ></app-form-input-error>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -96,6 +116,10 @@
             <ion-icon slot="end" name="thumbs-up-outline"></ion-icon>
           </ion-range>
         </ion-item>
+        <app-form-input-error
+          [form]="form"
+          formInput="avaliacao"
+        ></app-form-input-error>
       </ion-col>
     </ion-row>
 
@@ -114,12 +138,21 @@
             <ion-radio slot="start" color="tertiary" value="nao"></ion-radio>
           </ion-item>
         </ion-radio-group>
+        <app-form-input-error
+          [form]="form"
+          formInput="isPimenta"
+        ></app-form-input-error>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="success" expand="block">
+        <ion-button
+          type="submit"
+          color="success"
+          expand="block"
+          [disabled]="!form.valid"
+        >
           {{this.id || this.id === 0 ? 'Atualizar' : 'Salvar'}}
         </ion-button>
       </ion-col>

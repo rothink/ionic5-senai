@@ -1,8 +1,9 @@
 import { ComidaService } from "./../services/comida.service";
 import { ModalController } from "@ionic/angular";
 import { Component, Input, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { LoadingController } from "@ionic/angular";
+import { ToastController } from "@ionic/angular";
 
 @Component({
   selector: "app-modal-comida",
@@ -20,16 +21,17 @@ export class ModalComidaPage implements OnInit {
     private modal: ModalController,
     public formBuilder: FormBuilder,
     public comidaService: ComidaService,
-    public loading: LoadingController
+    public loading: LoadingController,
+    public toast: ToastController
   ) {
     this.form = formBuilder.group({
-      nome: [""],
-      tipo: [""],
-      descricao: [""],
-      dataEntrega: [""],
-      horaEntrega: [""],
-      avaliacao: [""],
-      isPimenta: [""],
+      nome: ["", [Validators.required]],
+      tipo: ["", [Validators.required]],
+      descricao: ["", [Validators.required]],
+      dataEntrega: ["", [Validators.required]],
+      horaEntrega: ["", [Validators.required]],
+      avaliacao: ["", [Validators.required]],
+      isPimenta: ["", [Validators.required]],
     });
   }
 
@@ -46,23 +48,55 @@ export class ModalComidaPage implements OnInit {
   }
 
   async submitForm(): Promise<void> {
+    if (!this.form.valid) {
+      return;
+    }
     await this.showLoading();
     await this.comidaService.salvarComida(this.form.value, this.id);
     await this.hideLoading();
+    await this.mostrarMensagem();
+
+    this.fecharModal();
+  }
+
+  async mostrarMensagem(): Promise<void> {
+    if (this.id || this.id === 0) {
+      await this.showToast("Comida atualizada com sucesso");
+      return;
+    }
+    await this.showToast("Comida cadastrada com sucesso");
   }
 
   fecharModal(): void {
     this.modal.dismiss();
   }
 
-  async showLoading() {
+  async showLoading(): Promise<void> {
     this.varLoading = await this.loading.create({
       message: "Aguarde ...",
     });
     await this.varLoading.present();
   }
 
-  async hideLoading() {
+  async hideLoading(): Promise<void> {
     await this.varLoading.dismiss();
+  }
+
+  async showToast(message: string): Promise<void> {
+    const toast = await this.toast.create({
+      message,
+      duration: 2000,
+      color: "success",
+    });
+    toast.present();
+  }
+
+  formInputIsRequired(formInput: string) {
+    if (this.form.controls[formInput]) {
+      if (this.form.controls[formInput].hasError("required")) {
+        return true;
+      }
+    }
+    return false;
   }
 }

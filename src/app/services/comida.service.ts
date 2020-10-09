@@ -1,3 +1,4 @@
+import { Comida } from "./../models/comida";
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
 
@@ -7,8 +8,8 @@ import { Storage } from "@ionic/storage";
 export class ComidaService {
   constructor(public storage: Storage) {}
 
-  public async salvarComida(comida, id) {
-    if (id) {
+  public async salvarComida(comida: Comida, id: number): Promise<void> {
+    if (id || id === 0) {
       await this.update(comida, id);
       return;
     }
@@ -20,10 +21,10 @@ export class ComidaService {
    * 2 - Macarrão
    * 3 - Batata
    */
-  public async update(comidaForm, id) {
+  public async update(comidaForm: Comida, id: number): Promise<void> {
     //comidaForm={Ovos} | id={2}
     const comidas = await this.getAll();
-    const comidasAtualizadas = comidas.map((comidalocalStorage, key) => {
+    const comidasAtualizadas = await comidas.map((comidalocalStorage, key) => {
       if (id === key) {
         return comidaForm;
       }
@@ -34,7 +35,7 @@ export class ComidaService {
     await this.storage.set("comidas", JSON.stringify(comidasAtualizadas));
   }
 
-  public async save(comida) {
+  public async save(comida: Comida): Promise<void> {
     let comidas = await this.getAll();
     if (!comidas) {
       comidas = [];
@@ -42,22 +43,22 @@ export class ComidaService {
     comidas.push(comida);
     await this.storage.set("comidas", JSON.stringify(comidas));
   }
-  public async getAll() {
+  public async getAll(): Promise<Comida[]> {
     let comidas = await this.storage.get("comidas");
     comidas = JSON.parse(comidas);
     return comidas;
   }
-  public async removeAll() {
-    return await this.storage.remove("comidas");
+  public async removeAll(): Promise<void> {
+    await this.storage.remove("comidas");
   }
 
-  public async remove(index: number) {
+  public async remove(index: number): Promise<void> {
     let comidas = await this.getAll();
     comidas.splice(index, 1);
     await this.storage.set("comidas", JSON.stringify(comidas));
   }
 
-  public async find(index: number) {
+  public async find(index: number): Promise<Comida> {
     const comidas = await this.getAll();
     const comidaProcurada = comidas.find((comida, key) => {
       if (index === key) {
