@@ -7,6 +7,9 @@ import { IonicModule } from "@ionic/angular";
 import { ModalComidaPageRoutingModule } from "./modal-comida-routing.module";
 
 import { ModalComidaPage } from "./modal-comida.page";
+/**
+ * Importação do componente de formInputError
+ */
 import { FormInputErrorComponent } from "../form-input-error/form-input-error.component";
 
 @NgModule({
@@ -17,7 +20,13 @@ import { FormInputErrorComponent } from "../form-input-error/form-input-error.co
     IonicModule,
     ModalComidaPageRoutingModule,
   ],
+  /**
+   * Em declarations
+   */
   declarations: [ModalComidaPage, FormInputErrorComponent],
+  /**
+   * E em Exportação
+   */
   exports: [FormInputErrorComponent],
 })
 export class ModalComidaPageModule {}

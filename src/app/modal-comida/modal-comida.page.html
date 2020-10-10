@@ -19,6 +19,11 @@
           <ion-label position="floating">Nome</ion-label>
           <ion-input formControlName="nome" type="text" required></ion-input>
         </ion-item>
+        <!-- 
+          Em cada item do formulário, 
+          é necessário adicionar o app-form-input-error
+          para mostrar os erros, de acordo com o nosso formControlName
+        -->
         <app-form-input-error
           [form]="form"
           formInput="nome"
@@ -43,6 +48,11 @@
             </ion-select-option>
           </ion-select>
         </ion-item>
+        <!-- 
+          Em cada item do formulário, 
+          é necessário adicionar o app-form-input-error
+          para mostrar os erros, de acordo com o nosso formControlName
+        -->
         <app-form-input-error
           [form]="form"
           formInput="tipo"
@@ -57,6 +67,11 @@
             placeholder="Descrição da comida..."
           ></ion-textarea>
         </ion-item>
+        <!-- 
+          Em cada item do formulário, 
+          é necessário adicionar o app-form-input-error
+          para mostrar os erros, de acordo com o nosso formControlName
+        -->
         <app-form-input-error
           [form]="form"
           formInput="descricao"
@@ -75,6 +90,11 @@
             placeholder="Selecione a data da entrega"
           ></ion-datetime>
         </ion-item>
+        <!-- 
+          Em cada item do formulário, 
+          é necessário adicionar o app-form-input-error
+          para mostrar os erros, de acordo com o nosso formControlName
+        -->
         <app-form-input-error
           [form]="form"
           formInput="dataEntrega"
@@ -91,6 +111,11 @@
             placeholder="Selecione a Hora de Entrega"
           ></ion-datetime>
         </ion-item>
+        <!-- 
+          Em cada item do formulário, 
+          é necessário adicionar o app-form-input-error
+          para mostrar os erros, de acordo com o nosso formControlName
+        -->
         <app-form-input-error
           [form]="form"
           formInput="horaEntrega"
@@ -116,6 +141,11 @@
             <ion-icon slot="end" name="thumbs-up-outline"></ion-icon>
           </ion-range>
         </ion-item>
+        <!-- 
+          Em cada item do formulário, 
+          é necessário adicionar o app-form-input-error
+          para mostrar os erros, de acordo com o nosso formControlName
+        -->
         <app-form-input-error
           [form]="form"
           formInput="avaliacao"
@@ -138,6 +168,11 @@
             <ion-radio slot="start" color="tertiary" value="nao"></ion-radio>
           </ion-item>
         </ion-radio-group>
+        <!-- 
+          Em cada item do formulário, 
+          é necessário adicionar o app-form-input-error
+          para mostrar os erros, de acordo com o nosso formControlName
+        -->
         <app-form-input-error
           [form]="form"
           formInput="isPimenta"

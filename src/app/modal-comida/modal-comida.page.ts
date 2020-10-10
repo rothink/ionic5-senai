@@ -25,6 +25,9 @@ export class ModalComidaPage implements OnInit {
     public toast: ToastController
   ) {
     this.form = formBuilder.group({
+      /**
+       * Validação com VALIDATORS
+       */
       nome: ["", [Validators.required]],
       tipo: ["", [Validators.required]],
       descricao: ["", [Validators.required]],
@@ -89,14 +92,5 @@ export class ModalComidaPage implements OnInit {
       color: "success",
     });
     toast.present();
-  }
-
-  formInputIsRequired(formInput: string) {
-    if (this.form.controls[formInput]) {
-      if (this.form.controls[formInput].hasError("required")) {
-        return true;
-      }
-    }
-    return false;
   }
 }
