@@ -51,6 +51,10 @@ export class ModalComidaPage implements OnInit {
   }
 
   async submitForm(): Promise<void> {
+    /**
+     * Se o form form for inválido,
+     * então apenas não segue o fluxo
+     */
     if (!this.form.valid) {
       return;
     }
