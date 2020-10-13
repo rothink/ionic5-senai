@@ -1,5 +1,8 @@
 {
   "name": "senaiApp",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "3bd9d469"
 }
